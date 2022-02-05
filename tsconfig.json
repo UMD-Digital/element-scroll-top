@@ -1,0 +1,16 @@
+{
+  "include": ["source"],
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "lib": ["es6", "DOM", "dom.iterable"],
+    "target": "ES2015",
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "source"
+  }
+}
