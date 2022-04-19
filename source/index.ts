@@ -27,7 +27,7 @@ template.innerHTML = `
       justify-content: center !important;
       position: fixed !important;
       right: 0 !important;
-      bottom: 15vh !important;
+      bottom: 20vh !important;
       transform: translateX(100%);
       height: 60px;
       width: 80px;
