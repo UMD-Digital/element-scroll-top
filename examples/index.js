@@ -21,7 +21,6 @@ template.innerHTML = `
   <style>
   
     :host {
-      display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       position: fixed !important;
@@ -84,8 +83,19 @@ const debounce = function (cb, wait = 20) {
 export default class ScrollTop extends HTMLElement {
     constructor() {
         super();
+        this._showMobile = false;
         this._shadow = this.attachShadow({ mode: 'open' });
         this._shadow.appendChild(template.content.cloneNode(true));
+    }
+    static get observedAttributes() {
+        return ['show-mobile'];
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'show-mobile' && newValue) {
+            if (newValue === 'true') {
+                this.style.display = 'flex !important';
+            }
+        }
     }
     connectedCallback() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -93,7 +103,9 @@ export default class ScrollTop extends HTMLElement {
             setTimeout(() => {
                 this.style.transition = 'transform 0.5s ease-in-out';
             }, 100);
+            this.eventResize();
             window.addEventListener('scroll', debounce(() => this.eventScroll()));
+            window.addEventListener('resize', debounce(() => this.eventResize()));
         });
     }
     eventScroll() {
@@ -102,6 +114,14 @@ export default class ScrollTop extends HTMLElement {
         }
         else {
             this.style.transform = 'translateX(100%)';
+        }
+    }
+    eventResize() {
+        if (window.innerWidth >= 768) {
+            this.style.display = 'flex';
+        }
+        if (window.innerWidth < 768 && !this._showMobile) {
+            this.style.display = 'none';
         }
     }
 }

@@ -43,11 +43,29 @@
     div[slot='contact'] a {
       color: #454545;
     }
+
+    footer {
+      height: 400px;
+      margin-top: calc(500vh - 400px);
+      background-color: black;
+      width: 100%;
+      display: block;
+      z-index: 9999;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      footer {
+        height: 240px;
+        margin-top: calc(500vh - 240px);
+      }
+    }
   </style>
 
   <body>
     <main>
       <h1>Top</h1>
+      <footer></footer>
       <umd-scroll-top> </umd-scroll-top>
     </main>
     <script src="index.js" type="module" defer></script>
