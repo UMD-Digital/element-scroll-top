@@ -27,7 +27,7 @@ template.innerHTML = `
       justify-content: center !important;
       position: fixed !important;
       right: 0 !important;
-      bottom: 20vh !important;
+      bottom: 20vh;
       transform: translateX(100%);
       height: 60px;
       width: 80px;
@@ -95,6 +95,7 @@ const debounce = function <T extends Function>(cb: T, wait = 20) {
 export default class ScrollTop extends HTMLElement {
   _shadow: ShadowRoot;
   _showMobile = false;
+  _isBottomSet = false;
 
   constructor() {
     super();
@@ -104,7 +105,7 @@ export default class ScrollTop extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['show-mobile'];
+    return ['show-mobile', 'position-bottom'];
   }
 
   attributeChangedCallback(
@@ -114,8 +115,13 @@ export default class ScrollTop extends HTMLElement {
   ) {
     if (name === 'show-mobile' && newValue) {
       if (newValue === 'true') {
-        this.style.display = 'flex !important';
+        this._showMobile = true;
       }
+    }
+
+    if (name === 'position-bottom' && newValue) {
+      this.style.bottom = newValue;
+      this._isBottomSet = true;
     }
   }
 
@@ -126,6 +132,7 @@ export default class ScrollTop extends HTMLElement {
       this.style.transition = 'transform 0.5s ease-in-out';
     }, 100);
 
+    this.style.display = 'flex';
     this.eventResize();
 
     window.addEventListener(
@@ -140,10 +147,21 @@ export default class ScrollTop extends HTMLElement {
   }
 
   eventScroll() {
-    if (window.pageYOffset > window.innerHeight) {
-      this.style.transform = 'translateX(0)';
-    } else {
-      this.style.transform = 'translateX(100%)';
+    if (this._showMobile || window.innerWidth >= 768) {
+      if (window.pageYOffset > window.innerHeight) {
+        this.style.transform = 'translateX(0)';
+      } else {
+        this.style.transform = 'translateX(100%)';
+      }
+
+      if (!this._isBottomSet) {
+        if (
+          document.body.scrollHeight - window.pageYOffset <
+          window.innerHeight * 2
+        ) {
+          this.style.transform = 'translateX(100%)';
+        }
+      }
     }
   }
 

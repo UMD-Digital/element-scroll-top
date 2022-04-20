@@ -17,8 +17,13 @@ import '@universityofmaryland/scroll-top';
 #### HTML usage
 
 ```html
-<umd-scroll-top></umd-scroll-top>
+<umd-scroll-top show-mobile="true" position-bottom="30vh"></umd-scroll-top>
 ```
+
+Optional Attributes
+
+1. show-mobile: defaults to false
+2. position-bottom: defaults to length of view
 
 ## License
 
