@@ -11,6 +11,7 @@ const Colors = {
     white: '#fff',
     offWhite: '#f1f1f1',
     grayLight: '#e6e6e6',
+    grayDark: '#454545',
     red: '#e21833',
 };
 const chevron = `<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103.4 185.34"> <path d="M51.71,185.34A10.74,10.74,0,0,1,44.11,167l74.36-74.35L44.11,18.32A10.73,10.73,0,0,1,59.29,3.14l81.94,81.94a10.73,10.73,0,0,1,0,15.17L59.29,182.19A10.67,10.67,0,0,1,51.71,185.34Z" transform="translate(-40.97 0)" /> </svg>`;
@@ -50,6 +51,7 @@ template.innerHTML = `
       font-size: 10px;
       font-weight: bold;
       text-align: center;
+      color: ${Colors.grayDark} !important;
     }
 
   </style>

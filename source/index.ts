@@ -8,6 +8,7 @@ const Colors = {
   white: '#fff',
   offWhite: '#f1f1f1',
   grayLight: '#e6e6e6',
+  grayDark: '#454545',
   red: '#e21833',
 };
 
@@ -51,6 +52,7 @@ template.innerHTML = `
       font-size: 10px;
       font-weight: bold;
       text-align: center;
+      color: ${Colors.grayDark} !important;
     }
 
   </style>
